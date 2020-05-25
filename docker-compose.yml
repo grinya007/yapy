@@ -1,0 +1,24 @@
+version: '3.7'
+services: 
+    fastapi:
+        container_name: fastapi
+        build:
+            context: ./fastapi/
+            dockerfile: Dockerfile
+        volumes:
+            - ./fastapi/app:/app:ro
+        environment:
+            - WEB_CONCURRENCY=1
+            - PORT=8080
+        restart: always
+    nginx:
+        depends_on:
+            - fastapi
+        container_name: nginx
+        build: 
+            context: ./nginx/
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        restart: always
+        
