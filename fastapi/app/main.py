@@ -1,7 +1,10 @@
 from fastapi import FastAPI, HTTPException, WebSocket
 from pydantic import BaseModel
 
-app = FastAPI()
+app = FastAPI(
+    openapi_url="/api/openapi.json",
+    docs_url="/api/docs"
+)
 
 items = {}
 
