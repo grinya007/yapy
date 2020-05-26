@@ -11,9 +11,22 @@ services:
             - WEB_CONCURRENCY=1
             - PORT=8080
         restart: always
+    react:
+        container_name: react
+        build: 
+            context: ./react/
+            dockerfile: Dockerfile
+        volumes:
+            - ./react/app:/app
+        restart: always
+        command: npm start
+        stdin_open: true
+        environment:
+            - CHOKIDAR_USEPOLLING=true
     nginx:
         depends_on:
             - fastapi
+            - react
         container_name: nginx
         build: 
             context: ./nginx/
@@ -21,6 +34,6 @@ services:
         volumes:
             - ./nginx/conf.d:/etc/nginx/conf.d:ro
         ports:
-            - "80:80"
+            - 80:80
         restart: always
         
