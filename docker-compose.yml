@@ -10,7 +10,7 @@ services:
         environment:
             - WEB_CONCURRENCY=1
             - PORT=8080
-        restart: always
+        #restart: always
     react:
         container_name: react
         build: 
@@ -18,7 +18,7 @@ services:
             dockerfile: Dockerfile
         volumes:
             - ./react/app:/app
-        restart: always
+        #restart: always
         command: npm start
         stdin_open: true
         environment:
@@ -35,5 +35,5 @@ services:
             - ./nginx/conf.d:/etc/nginx/conf.d:ro
         ports:
             - 80:80
-        restart: always
+        #restart: always
         
