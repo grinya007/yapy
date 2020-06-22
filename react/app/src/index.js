@@ -4,10 +4,18 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import App from './components/App'
 import rootReducer from './reducers'
+import createSagaMiddleware from 'redux-saga'
+import { logger } from 'redux-logger'
+import rootSaga from './sagas'
+
+const sagaMiddleware = createSagaMiddleware()
 
 const store = configureStore({
-  reducer: rootReducer
+  reducer: rootReducer,
+  middleware: [sagaMiddleware, logger]
 })
+
+sagaMiddleware.run(rootSaga)
 
 render(
   <Provider store={store}>

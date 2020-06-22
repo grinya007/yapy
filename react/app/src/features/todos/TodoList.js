@@ -6,7 +6,7 @@ import { Table, Col } from 'react-materialize'
 const TodoList = ({ todos, toggleTodo }) => (
   <Table><tbody>
     {todos.map(todo => (
-      <tr><td><Todo key={todo.id} {...todo} onClick={() => toggleTodo(todo.id)} /></td></tr>
+      <tr key={todo.id}><td><Todo key={todo.id} {...todo} onClick={() => toggleTodo(todo.id)} /></td></tr>
     ))}
   </tbody></Table>
 )
